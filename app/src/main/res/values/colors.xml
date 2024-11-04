@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="color_fondo">#8EAB6B</color>
+
+    <color name="color_boton_sin_pulsar">#C4B5A6</color>
+    <color name="color_boton_pulsado">#D0A172</color>
+</resources>

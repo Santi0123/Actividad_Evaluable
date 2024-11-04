@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Actividad Evaluable</string>
+
+    <string name="boton_gmail">Abriendo gmail</string>
+    <string name="boton_enlace">Abriendo url</string>
+    <string name="boton_telefono">Abriendo telefono</string>
+    <string name="boton_mapa">Abriendo mapa</string>
+
+    <string name="volver_aplicacion">Volviste a la aplicación</string>
+    <string name="no_valido_numero_de_telefono">No es valido el formato del teléfono</string>
+    <string name="no_hay_numero_de_telefono">No has ingresado teléfono</string>
+
+    <string name="shared_prefernces">shared_preferences</string>
+    <string name="shared_phone_key">shared_phone_key</string>
+    <string name="shared_phone">shared_phone</string>
+
+</resources>
