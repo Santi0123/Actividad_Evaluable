@@ -60,6 +60,7 @@ class LlamarTelefono : AppCompatActivity() {
 
     private fun volverMarcarNumero() {
         val intent = Intent(this, MarcarNumero::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
         startActivity(intent)
     }
 
@@ -100,6 +101,7 @@ class LlamarTelefono : AppCompatActivity() {
     }
     fun volverCasa(){
         val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
         startActivity(intent)
     }
 }

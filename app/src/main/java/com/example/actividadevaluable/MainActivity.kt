@@ -50,9 +50,12 @@ class MainActivity : AppCompatActivity() {
     private fun openTelefono() {
         val phone = sharedPreferences.getString("shared_phone_key", null)
         if (phone == null) {
+
             val intent = Intent(this, MarcarNumero::class.java)
             startActivity(intent)
+
         } else {
+
             val intent = Intent(this, LlamarTelefono::class.java)
             startActivity(intent)
         }

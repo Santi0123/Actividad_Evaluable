@@ -49,12 +49,25 @@
 
     <Button
         android:id="@+id/botonHome"
-        android:layout_width="83dp"
-        android:layout_height="67dp"
+        android:layout_width="86dp"
+        android:layout_height="73dp"
         android:background="@drawable/casa"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.838"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_aceptar"
-        app:layout_constraintVertical_bias="0.694" />
+        app:layout_constraintVertical_bias="0.526" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="71dp"
+        android:layout_height="62dp"
+        android:background="@drawable/libro"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.191"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_aceptar"
+        app:layout_constraintVertical_bias="0.535" />
 </androidx.constraintlayout.widget.ConstraintLayout>
