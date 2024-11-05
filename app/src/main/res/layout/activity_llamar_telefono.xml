@@ -44,4 +44,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/botonHome"
+        android:layout_width="83dp"
+        android:layout_height="67dp"
+        android:background="@drawable/casa"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/nuevo_telefono"
+        app:layout_constraintHorizontal_bias="0.621"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llamar_sos"
+        app:layout_constraintVertical_bias="0.674" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

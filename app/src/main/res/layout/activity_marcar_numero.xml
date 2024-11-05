@@ -46,4 +46,15 @@
         app:layout_constraintTop_toBottomOf="@+id/texto_telefono"
         app:layout_constraintVertical_bias="0.185"
         />
+
+    <Button
+        android:id="@+id/botonHome"
+        android:layout_width="83dp"
+        android:layout_height="67dp"
+        android:background="@drawable/casa"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_aceptar"
+        app:layout_constraintVertical_bias="0.694" />
 </androidx.constraintlayout.widget.ConstraintLayout>

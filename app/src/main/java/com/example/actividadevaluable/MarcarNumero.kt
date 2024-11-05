@@ -27,6 +27,8 @@ class MarcarNumero : AppCompatActivity() {
 
         initSharedPreferences()
         start()
+        setListener()
+
     }
 
     private fun initSharedPreferences() {
@@ -71,5 +73,14 @@ class MarcarNumero : AppCompatActivity() {
         phone?.let {
             marcarNumeroBinding.textoTelefono.setText(it)
         }
+    }
+    private fun setListener() {
+
+        marcarNumeroBinding.botonHome.setOnClickListener{volverCasa()}
+    }
+
+    fun volverCasa(){
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 }

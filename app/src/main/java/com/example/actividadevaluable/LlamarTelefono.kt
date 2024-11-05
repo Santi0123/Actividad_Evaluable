@@ -55,6 +55,7 @@ class LlamarTelefono : AppCompatActivity() {
     private fun setListener() {
         llamarTelefonoBinding.nuevoTelefono.setOnClickListener { volverMarcarNumero() }
         llamarTelefonoBinding.llamarSos.setOnClickListener { realizarLlamada() } // Cambia esto según el ID correcto
+        llamarTelefonoBinding.botonHome.setOnClickListener{volverCasa()}
     }
 
     private fun volverMarcarNumero() {
@@ -96,5 +97,9 @@ class LlamarTelefono : AppCompatActivity() {
                 Toast.makeText(this, "Ha sido denegado", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+    fun volverCasa(){
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 }
