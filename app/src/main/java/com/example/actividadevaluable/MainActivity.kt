@@ -17,11 +17,22 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.actividadevaluable.databinding.ActivityMainBinding
 import java.util.*
 
+/***
+ * @author Santi
+ * @version 0.1
+ * @since 05-11-2024
+ */
+
 class MainActivity : AppCompatActivity() {
 
     lateinit var mainBinding: ActivityMainBinding
     private lateinit var sharedPreferences: SharedPreferences
 
+    /**
+     * Con es mainBinding infla el layout y inicializo el binding
+     * y estblezco la vista del contenido que hay en la actividad.
+     * Llamo al metodo initUI para iniciar la interfaz de usuario
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -31,61 +42,77 @@ class MainActivity : AppCompatActivity() {
         initUI()
     }
 
+    /**
+     * La funcion initUI llama a las funciones setListener y initSharedPreferences
+     */
     private fun initUI() {
         setListener()
         initSharedPreferences()
     }
 
+    /**
+     * Llamo a todas las funcionalidades que tiene los botones del MainActivitity
+     */
     private fun setListener() {
-        mainBinding.buttonTelefono.setOnClickListener { openTelefono() }
-        mainBinding.buttonEnlace.setOnClickListener { openUrl("https://github.com/") }
-        mainBinding.buttonGps.setOnClickListener { openMap() }
-        mainBinding.buttonGmail.setOnClickListener { openAlarma() }
+        mainBinding.buttonTelefono.setOnClickListener { openTelefono() } // El metodo que va hacer el boton de abrir el telefono
+        mainBinding.buttonEnlace.setOnClickListener { openUrl("https://github.com/") } //El metodo va hacer que el boton de abra la url
+        mainBinding.buttonGps.setOnClickListener { openMap() } //Boton para abrir el mapa
+        mainBinding.buttonGmail.setOnClickListener { openAlarma() } //Boton para abrir la alarma
     }
+
 
     private fun initSharedPreferences() {
         this.sharedPreferences = getSharedPreferences(getString(R.string.shared_prefernces), Context.MODE_PRIVATE)
     }
 
+    /**
+     * Funcion que se va a encargar de abrir el teléfono,
+     * la única dificultad es que si tiene un telefono guardado
+     * en la caja de preferencias compartidas,
+     * pues que nos mande a un activity o a otro.
+     */
     private fun openTelefono() {
-        val phone = sharedPreferences.getString("shared_phone_key", null)
-        if (phone == null) {
-
+        val phone = sharedPreferences.getString("shared_phone_key", null) //se recoge si hay telefono o no
+        if (phone == null) { //si no hay nos manda a la clase MarcarNumero
             val intent = Intent(this, MarcarNumero::class.java)
             startActivity(intent)
-
-        } else {
-
+        } else { //Si hay nos va a llevar directamente a la clase LlamarTelefono
             val intent = Intent(this, LlamarTelefono::class.java)
             startActivity(intent)
         }
     }
 
-    // Para abrir la alarma
+    /**
+     * Esta funcion es que dandole al boton de la alarma,
+     * se nos habra el reloj en la seccion alarma,
+     * y esta configurada para que suene en 2 min
+     */
     private fun openAlarma() {
 
         val calendar = Calendar.getInstance()
 
-        calendar.add(Calendar.SECOND, 120)
+        calendar.add(Calendar.SECOND, 120)//le decimos cuanto tiempo queremos que sea
 
         val alarmHour = calendar.get(Calendar.HOUR_OF_DAY)
         val alarmMinute = calendar.get(Calendar.MINUTE)
 
         val intent = Intent(AlarmClock.ACTION_SET_ALARM).apply {
-            putExtra(AlarmClock.EXTRA_HOUR, alarmHour)
-            putExtra(AlarmClock.EXTRA_MINUTES, alarmMinute)
-            putExtra(AlarmClock.EXTRA_MESSAGE, "La alarma sonará en ")
+            putExtra(AlarmClock.EXTRA_HOUR, alarmHour) // dice la hora que sonara en la alarma
+            putExtra(AlarmClock.EXTRA_MINUTES, alarmMinute) // dice los segundo que sonara en la alarma
+            putExtra(AlarmClock.EXTRA_MESSAGE, "La alarma sonará en 2 min") // muestra un mensaje opcional
         }
 
-        if (intent.resolveActivity(packageManager) != null) {
+        if (intent.resolveActivity(packageManager) != null) {//si no es null hace el startActivity
             startActivity(intent)
-        } else {
+        } else {//si es null pues muestra un mensaje
             Toast.makeText(this, "No se encontró una aplicación de reloj compatible", Toast.LENGTH_SHORT).show()
         }
-
     }
 
-    // Para abrir el Google Maps
+    /**
+     * Esta funcion es una de las más basicas,
+     * solo abre el google map
+     */
     private fun openMap() {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.setPackage("com.google.android.apps.maps")
@@ -93,26 +120,21 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, getString(R.string.boton_mapa), Toast.LENGTH_SHORT).show()
     }
 
-    // Para abrir mi URL
+    /**
+     * Habre una URL en el caso que haya y si no la hay,
+     * muestra un mensaje
+     */
     private fun openUrl(link: String) {
-        if (link.isNotEmpty() && Patterns.WEB_URL.matcher(link).matches()) {
+
+        if (link == null) { // si no hay url manda un mensaje
+            Toast.makeText(this, "No hay url", Toast.LENGTH_SHORT).show()
+        }else{ // pone la alarma
             val uri = Uri.parse(link)
             val intent = Intent(Intent.ACTION_VIEW, uri)
+            startActivity(intent)
+            Toast.makeText(this, "Abriendo url...", Toast.LENGTH_SHORT).show()
 
-            // Añade las banderas para que el selector se muestre cada vez
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED)
-
-            // Crea el chooser para permitir al usuario seleccionar la aplicación
-            val chooser = Intent.createChooser(intent, "Elige el navegador")
-
-            try {
-                startActivity(chooser)
-                Toast.makeText(this, getString(R.string.boton_enlace), Toast.LENGTH_SHORT).show()
-            } catch (e: ActivityNotFoundException) {
-                Toast.makeText(this, "No se puede abrir el enlace", Toast.LENGTH_SHORT).show()
-            }
-        } else {
-            Toast.makeText(this, "URL no válida", Toast.LENGTH_SHORT).show()
         }
+
     }
 }

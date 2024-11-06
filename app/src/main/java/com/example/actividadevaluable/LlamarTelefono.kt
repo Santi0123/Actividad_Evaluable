@@ -68,8 +68,8 @@ class LlamarTelefono : AppCompatActivity() {
         val phone = sharedPreferences.getString("shared_phone_key", null)
 
         if (!phone.isNullOrEmpty()) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//comprueba la version de sdk
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {//comprueba los permisos
                     hacerLlamada(phone)
                 } else {
                     ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CALL_PHONE), REQUEST_CALL_PHONE)
@@ -82,11 +82,17 @@ class LlamarTelefono : AppCompatActivity() {
         }
     }
 
+    /**
+     * realiza la accion de hacer la llamada
+     */
     private fun hacerLlamada(phone: String) {
         val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:$phone"))
         startActivity(intent)
     }
 
+    /**
+     * Es una funcion que maneja los permisos si el usuario los ha acptado o lo ha denegado
+     */
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CALL_PHONE) {
